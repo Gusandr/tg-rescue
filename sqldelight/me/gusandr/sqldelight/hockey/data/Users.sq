@@ -1,0 +1,35 @@
+CREATE TABLE users (
+  userId BIGINT PRIMARY KEY,
+  messageIds LONGTEXT,
+  isBanned BOOLEAN,
+  blockTime BIGINT DEFAULT 0
+);
+
+selectAll:
+SELECT *
+FROM users;
+
+insert:
+INSERT INTO users(userId, messageIds, isBanned)
+VALUES(?, ?, ?);
+
+selectMessageUser:
+SELECT messageIds
+FROM users
+WHERE userId = ?;
+
+changeMessage:
+UPDATE users
+SET messageIds = ?
+WHERE userId = ?;
+
+changeBanStatus:
+UPDATE users
+SET isBanned = ?,
+    blockTime = ?
+WHERE userId = ?;
+
+selectBanTime:
+SELECT blockTime
+FROM users
+WHERE userId = ?;
